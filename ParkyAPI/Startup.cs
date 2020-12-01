@@ -2,6 +2,7 @@
 
 
 
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ParkyAPI.Data;
+using ParkyAPI.Models.ParkyMapper;
+using ParkyAPI.Repository;
+using ParkyAPI.Repository.IRepository;
 
 namespace ParkyAPI
 {
@@ -24,7 +28,11 @@ namespace ParkyAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ParkDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ParkyAPI")));
+            services.AddDbContext<ParkDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("ParkyAPI")));
+            services.AddScoped<INationalParkRepository, NationalParkRepository>();
+            services.AddAutoMapper(typeof(ParkyMappings));
+            
             services.AddControllers();
         }
 
