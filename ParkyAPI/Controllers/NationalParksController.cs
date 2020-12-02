@@ -39,5 +39,49 @@ namespace ParkyAPI.Controllers
             
             return Ok(objDto);
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetNationalPark(int id)
+        {
+            var obj = _nationalParkRepository.GetNationalPark(id);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            var objDto = _mapper.Map<NationalParkDTO>(obj);
+            return Ok(objDto);
+        }
+
+        [HttpPost]
+        public IActionResult CreateNationalPark(NationalParkDTO nationalParkDTO)
+        {
+            if (nationalParkDTO == null)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (_nationalParkRepository.NationalParkExist(nationalParkDTO.Name))
+            {
+                ModelState.AddModelError("", "Esse parque já existe");
+                return StatusCode(404, ModelState);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var nationalParkObj = _mapper.Map<NationalPark>(nationalParkDTO);
+
+            if (!_nationalParkRepository.CreateNationalPark(nationalParkObj))
+            {
+                ModelState.AddModelError("", $"Ocorreu um erro ao salvar o registro {nationalParkDTO.Name}");
+                return StatusCode(500, ModelState);
+            }
+
+            return Ok();
+        }
     }
 }
