@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using ParkyAPI.Data;
 using ParkyAPI.Models.ParkyMapper;
 using ParkyAPI.Repository;
@@ -31,8 +32,17 @@ namespace ParkyAPI
             services.AddDbContext<ParkDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("ParkyAPI")));
             services.AddScoped<INationalParkRepository, NationalParkRepository>();
+
             services.AddAutoMapper(typeof(ParkyMappings));
-            
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("ParkyOpenAPISpec", new OpenApiInfo()
+                {
+                    Title = "Parky API",
+                    Version = "1"
+                });
+            });
+
             services.AddControllers();
         }
 
@@ -45,7 +55,13 @@ namespace ParkyAPI
             }
 
             app.UseHttpsRedirection();
-
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/swagger/ParkyOpenAPISpec/swagger.json", "Parky API");
+                    options.RoutePrefix = "";
+                }
+            );
             app.UseRouting();
 
             app.UseAuthorization();
