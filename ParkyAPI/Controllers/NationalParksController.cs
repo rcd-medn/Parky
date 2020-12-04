@@ -27,6 +27,10 @@ namespace ParkyAPI.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Recupera todos os registros de parques.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GetNationalParks()
         {
@@ -40,6 +44,11 @@ namespace ParkyAPI.Controllers
             return Ok(objDto);
         }
 
+        /// <summary>
+        /// Recupera o registro de um parque indicado pelo seu ID
+        /// </summary>
+        /// <param name="id">ID do registro</param>
+        /// <returns></returns>
         [HttpGet("{id:int}", Name = "GetNationalPark")]
         public IActionResult GetNationalPark(int id)
         {
@@ -54,6 +63,11 @@ namespace ParkyAPI.Controllers
             return Ok(objDto);
         }
 
+        /// <summary>
+        /// Registra um novo parque no banco de dados.
+        /// </summary>
+        /// <param name="nationalParkDTO">Informações do novo registro</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult CreateNationalPark([FromBody]NationalParkDTO nationalParkDTO)
         {
@@ -68,11 +82,6 @@ namespace ParkyAPI.Controllers
                 return StatusCode(404, ModelState);
             }
 
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
             var nationalParkObj = _mapper.Map<NationalPark>(nationalParkDTO);
 
             if (!_nationalParkRepository.CreateNationalPark(nationalParkObj))
@@ -84,6 +93,12 @@ namespace ParkyAPI.Controllers
             return CreatedAtRoute("GetNationalPark", new { id = nationalParkObj.Id }, nationalParkObj);
         }
 
+        /// <summary>
+        /// Atualiza o registro de um parque
+        /// </summary>
+        /// <param name="nationalParkId">ID do registro a ser atualizado</param>
+        /// <param name="nationalParkDTO">Informações do parque que devem ser atualizadas</param>
+        /// <returns></returns>
         [HttpPatch("{nationalParkId:int}", Name = "UpdateNationalPark")]
         public IActionResult UpdateNationalPark(int nationalParkId, [FromBody] NationalParkDTO nationalParkDTO)
         {
@@ -102,6 +117,11 @@ namespace ParkyAPI.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Exclusão de registro de um parque
+        /// </summary>
+        /// <param name="nationalParkId">ID do parque a ser excluído</param>
+        /// <returns></returns>
         [HttpDelete("{nationalParkId:int}", Name = "DeleteNationalPark")]
         public IActionResult DeleteNtionalPark(int nationalParkId)
         {

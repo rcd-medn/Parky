@@ -14,6 +14,9 @@ using ParkyAPI.Data;
 using ParkyAPI.Models.ParkyMapper;
 using ParkyAPI.Repository;
 using ParkyAPI.Repository.IRepository;
+using System;
+using System.IO;
+using System.Reflection;
 
 namespace ParkyAPI
 {
@@ -39,8 +42,21 @@ namespace ParkyAPI
                 options.SwaggerDoc("ParkyOpenAPISpec", new OpenApiInfo()
                 {
                     Title = "Parky API",
-                    Version = "1"
+                    Version = "1",
+                    Description = "API desenvolvida para estudo",
+                    Contact = new OpenApiContact()
+                    {
+                        Name = "Ricardo"
+                    },
+                    License = new OpenApiLicense()
+                    {
+                        Name = "Tipo de licença"
+                    }
                 });
+
+                var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
+                options.IncludeXmlComments(cmlCommentsFullPath);
             });
 
             services.AddControllers();
