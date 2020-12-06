@@ -39,5 +39,45 @@
             <param name="nationalParkId">ID do parque a ser excluído</param>
             <returns></returns>
         </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.GetTrails">
+            <summary>
+            Recupera todos os registros de trilhas cadastradas
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.GetTrail(System.Int32)">
+            <summary>
+            Recupera o registro de uma trilha indicado pelo seu ID
+            </summary>
+            <param name="id">ID do registro da trilha</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.CreateTrail(ParkyAPI.Models.DTOs.TrailCreateDTO)">
+            <summary>
+            Registra uma nova trilha no banco de dados.
+            </summary>
+            <param name="trailDTO">Informações do novo registro</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.UpdateTrail(System.Int32,ParkyAPI.Models.DTOs.TrailUpdatetDTO)">
+            <summary>
+            Atualiza o registro de uma trilha
+            </summary>
+            <param name="trailId">ID do registro a ser atualizado</param>
+            <param name="trailDTO">Informações da trilha que devem ser atualizadas</param>
+            <returns></returns>
+        </member>
+        <member name="M:ParkyAPI.Controllers.TrailsController.DeleteTrail(System.Int32)">
+            <summary>
+            Exclusão de registro de uma trilha
+            </summary>
+            <param name="trailId">ID da trilha a ser excluído</param>
+            <returns></returns>
+        </member>
+        <member name="T:ParkyAPI.Models.Trail.DifficultyType">
+            <summary>
+            
+            </summary>
+        </member>
     </members>
 </doc>
