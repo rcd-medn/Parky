@@ -39,6 +39,12 @@
             <param name="nationalParkId">ID do parque a ser excluído</param>
             <returns></returns>
         </member>
+        <member name="M:ParkyAPI.Controllers.NationalParksV2Controller.GetNationalParks">
+            <summary>
+            Recupera todos os registros de parques.
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:ParkyAPI.Controllers.TrailsController.GetTrails">
             <summary>
             Recupera todos os registros de trilhas cadastradas
