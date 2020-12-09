@@ -70,6 +70,28 @@ namespace ParkyAPI.Controllers
             return Ok(objDto);
         }
 
+        [HttpGet("[action]/{nationalParkId:int}")]
+        [ProducesResponseType(200, Type = typeof(TrailDTO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(404)]
+        [ProducesDefaultResponseType]
+        public IActionResult GetTrailInNationalPark(int nationalParkId)
+        {
+            var objList = _trailRepository.GetTrailsInNationalPark(nationalParkId);
+
+            if (objList == null)
+            {
+                return NotFound();
+            }
+
+            var objDto = new List<TrailDTO>();
+            foreach (var obj in objList)
+            {
+                objDto.Add(_mapper.Map<TrailDTO>(obj));
+            }
+            return Ok(objDto);
+        }
+
         /// <summary>
         /// Registra uma nova trilha no banco de dados.
         /// </summary>
@@ -101,7 +123,7 @@ namespace ParkyAPI.Controllers
                 return StatusCode(500, ModelState);
             }
 
-            return CreatedAtRoute("GetTrail", new { id = trailObj.Id }, trailObj);
+            return CreatedAtRoute("GetTrail", new { version = HttpContext.GetRequestedApiVersion().ToString(), id = trailObj.Id }, trailObj);
         }
 
         /// <summary>
