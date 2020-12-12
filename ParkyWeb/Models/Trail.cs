@@ -3,11 +3,10 @@
 
 
 using System.ComponentModel.DataAnnotations;
-using static ParkyAPI.Models.Trail;
 
-namespace ParkyAPI.Models.DTOs
+namespace ParkyWeb.Models
 {
-    public class TrailDTO
+    public class Trail
     {
         public int Id { get; set; }
 
@@ -20,7 +19,9 @@ namespace ParkyAPI.Models.DTOs
         [Required]
         public int NationalParkId { get; set; }
 
-        public NationalParkDTO NationalPark { get; set; }
+        public NationalPark NationalPark { get; set; }
+
+        public enum DifficultyType { Ease, Moderate, Difficult, Expert }
 
         public DifficultyType Difficulty { get; set; }
     }
