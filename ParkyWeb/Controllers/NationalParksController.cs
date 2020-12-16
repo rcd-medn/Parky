@@ -22,7 +22,7 @@ namespace ParkyWeb.Controllers
             _nationalParkRepository = nationalParkRepository;
         }
 
-        public IActionResult Index() => View();
+        public IActionResult Index() => View(new NationalPark() { });
 
         public async Task<IActionResult> GetAllNationalPark()
         {
