@@ -25,6 +25,7 @@
         <div class="col-12 p-3">
             <h2 class="text-primary">@title</h2>
         </div>
+        
         <div class="col-8">
             <div class="form-group row">
                 <div class="col-4">
@@ -67,7 +68,7 @@
                             dateEst = Model.Established.ToShortDateString();
                         }
                     }
-                    <input id="datepicker" value="@dateEst" type="text" asp-for="@Model.Established" class="form-control" />
+                    <input id="datepicker" value="@dateEst" type="text" asp-for="Established" class="form-control" />
                 </div>
             </div>
 
