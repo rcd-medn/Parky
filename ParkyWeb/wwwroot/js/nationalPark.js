@@ -33,8 +33,8 @@ function loadDataTable() {
 
 function Delete(url) {
     swal({
-        title: "Are you sure you want to Delete?",
-        text: "You will not be able to restore the data!",
+        title: "Você tem certeza que deseja remover o registro do banco de dados?",
+        text: "Após a remoção o registro não poderá ser restaurado.",
         icon: "warning",
         buttons: true,
         dangerMode: true
