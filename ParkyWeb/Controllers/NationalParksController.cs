@@ -96,10 +96,10 @@ namespace ParkyWeb.Controllers
             var status = await _nationalParkRepository.DeleteAsync(SD.NationalParkAPIPath, id);
             if (status)
             {
-                return Json(new { succes = true, message = "Registro removido do banco de dados com sucesso!" });
+                return Json(new { success = true, message = "Registro removido do banco de dados com sucesso!" });
             }
 
-            return Json(new { succes = false, message = "Não foi possível remover o registro do banco de dados." });
+            return Json(new { success = false, message = "Não foi possível remover o registro do banco de dados." });
         }
     }
 }
