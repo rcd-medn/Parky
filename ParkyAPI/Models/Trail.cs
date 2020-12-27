@@ -19,6 +19,9 @@ namespace ParkyAPI.Models
         [Required]
         public double Distance { get; set; }
 
+        [Required]
+        public double Elevation { get; set; }
+
         public DateTime DateCreated { get; set; }
 
         [Required]
