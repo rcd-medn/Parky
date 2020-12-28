@@ -26,8 +26,10 @@ namespace ParkyWeb.Controllers
             _trailRepository = trailRepository;
         }
 
+        [HttpGet]
         public IActionResult Index() => View(new Trail() { });
 
+        [HttpGet]
         public async Task<IActionResult> GetAllTrail()
         {
             return Json(new { data = await _trailRepository.GetAllAsync(SD.TrailAPIPath) });
