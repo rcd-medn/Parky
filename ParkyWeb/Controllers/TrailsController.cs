@@ -42,7 +42,8 @@ namespace ParkyWeb.Controllers
 
             TrailsVM trailsVM = new TrailsVM()
             {
-                NationalParkList = npList.Select(i => new SelectListItem { Text = i.Name, Value = i.Id.ToString() })
+                NationalParkList = npList.Select(i => new SelectListItem { Text = i.Name, Value = i.Id.ToString() }),
+                Trail = new Trail()
             };
             
             if (id == null)
