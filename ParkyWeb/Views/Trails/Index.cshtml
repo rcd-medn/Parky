@@ -4,7 +4,7 @@
 
 <br />
 
-<div class="backgroundWhite">
+<div class="p-4" style="border-radius:20px">
     <div class="row">
         <div class="col-6">
             <h2 class="text-primary">Lista de Trilhas</h2>
@@ -17,17 +17,19 @@
     <br />
     <br />
 
-    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
-        <thead>
-            <tr>
-                <th>Parque Nacional</th>
-                <th>Nome da Trilha</th>
-                <th>Distância</th>
-                <th>Elevação</th>
-                <th></th>
-            </tr>
-        </thead>
-    </table>
+    <div class="p-3 rounded" style="background-color:#cde8e2">
+        <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr class="table-danger">
+                    <th>Parque Nacional</th>
+                    <th>Nome da Trilha</th>
+                    <th>Distância</th>
+                    <th>Elevação</th>
+                    <th></th>
+                </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 
 @section Scripts{
