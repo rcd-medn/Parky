@@ -12,12 +12,10 @@ using System.Collections.Generic;
 
 namespace ParkyAPI.Controllers
 {
-    //[Route("api/Trails")]
-    //[ApiExplorerSettings(GroupName = "ParkyOpenAPISpecTrails")]
     [Route("api/v{version:apiVersion}/trails")]
     [ApiController]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class TrailsController : Controller
+    public class TrailsController : ControllerBase
     {
         private ITrailRepository _trailRepository;
         private readonly IMapper _mapper;

@@ -3,24 +3,20 @@
 
 
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkyAPI.Models;
 using ParkyAPI.Models.DTOs;
 using ParkyAPI.Repository.IRepository;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ParkyAPI.Controllers
 {
-    // [Route("api/[controller]")]
-    //[ApiExplorerSettings(GroupName = "ParkyOpenAPISpecNP")]
     [Route("api/v{version:apiVersion}/nationalParks")]
     [ApiController]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    public class NationalParksController : Controller
+    public class NationalParksController : ControllerBase
     {
         private INationalParkRepository _nationalParkRepository;
         private readonly IMapper _mapper;
@@ -56,6 +52,7 @@ namespace ParkyAPI.Controllers
         /// <param name="id">ID do registro</param>
         /// <returns></returns>
         [HttpGet("{id:int}", Name = "GetNationalPark")]
+        [Authorize]
         [ProducesResponseType(200, Type = typeof(NationalParkDTO))]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
