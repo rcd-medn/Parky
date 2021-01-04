@@ -48,6 +48,7 @@ namespace ParkyAPI
 
             services.AddAutoMapper(typeof(ParkyMappings));
 
+            services.AddCors();
             services.AddApiVersioning(options =>
             {
                 options.AssumeDefaultVersionWhenUnspecified = true;
@@ -81,43 +82,6 @@ namespace ParkyAPI
                 };
             });
 
-            //services.AddSwaggerGen(options =>
-            //{
-            //    options.SwaggerDoc("ParkyOpenAPISpecNP", new OpenApiInfo()
-            //    {
-            //        Title = "Parky API",
-            //        Version = "1",
-            //        Description = "API desenvolvida para estudo",
-            //        Contact = new OpenApiContact()
-            //        {
-            //            Name = "Ricardo"
-            //        },
-            //        License = new OpenApiLicense()
-            //        {
-            //            Name = "Tipo de licença"
-            //        }
-            //    });
-
-            //    //options.SwaggerDoc("ParkyOpenAPISpecTrails", new OpenApiInfo()
-            //    //{
-            //    //    Title = "Parky API",
-            //    //    Version = "1",
-            //    //    Description = "API desenvolvida para estudo",
-            //    //    Contact = new OpenApiContact()
-            //    //    {
-            //    //        Name = "Ricardo"
-            //    //    },
-            //    //    License = new OpenApiLicense()
-            //    //    {
-            //    //        Name = "Tipo de licença"
-            //    //    }
-            //    //});
-
-            //    var xmlCommentFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //    var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentFile);
-            //    options.IncludeXmlComments(cmlCommentsFullPath);
-            //});
-
             services.AddControllers();
         }
 
@@ -140,14 +104,6 @@ namespace ParkyAPI
                 }
                 options.RoutePrefix = "";
             });
-            //app.UseSwaggerUI(options =>
-            //    {
-            //        options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecNP/swagger.json", "Parky API National Parks");
-            //        //options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecTrails/swagger.json", "Parky API Trails");
-            //        options.RoutePrefix = "";
-            //    }
-            //);
-
 
             app.UseRouting();
 
