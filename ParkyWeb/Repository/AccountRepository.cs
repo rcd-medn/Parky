@@ -3,10 +3,13 @@
 
 
 
+using Newtonsoft.Json;
 using ParkyWeb.Models;
 using ParkyWeb.Repository.IRepository;
 using System;
+using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace ParkyWeb.Repository
@@ -19,14 +22,54 @@ namespace ParkyWeb.Repository
         {
             _httpClient = httpClient;
         }
-        public Task<User> LoginAsync(string url, User objToCreate)
+        
+        public async Task<User> LoginAsync(string url, User objToCreate)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            if (objToCreate != null)
+            {
+                request.Content = new StringContent(JsonConvert.SerializeObject(objToCreate), Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                return new User();
+            }
+
+            var client = _httpClient.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                var jsonString = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<User>(jsonString);
+            }
+            else
+            {
+                return new User();
+            }
         }
 
-        public Task<bool> RegisterAsync(string url, User objToRegister)
+        public async Task<bool> RegisterAsync(string url, User objToRegister)
         {
-            throw new NotImplementedException();
+            var request = new HttpRequestMessage(HttpMethod.Post, url);
+            if (objToRegister != null)
+            {
+                request.Content = new StringContent(JsonConvert.SerializeObject(objToRegister), Encoding.UTF8, "application/json");
+            }
+            else
+            {
+                return false;
+            }
+
+            var client = _httpClient.CreateClient();
+            HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
