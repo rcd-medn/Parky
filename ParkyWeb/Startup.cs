@@ -4,6 +4,7 @@
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,6 +29,8 @@ namespace ParkyWeb
 
             services.AddScoped<INationalParkRepository, NationalParkRepository>();
             services.AddScoped<ITrailRepository, TrailRepository>();
+            services.AddScoped<IAccountRepository, AccountRepository>();
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddHttpClient();

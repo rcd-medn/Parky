@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿
+
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor httpAccessor
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -24,19 +30,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-white" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="NationalParks" asp-action="Index">Prques Nacionais</a>
-                        </li>
+                        @if (httpAccessor.HttpContext.Session.GetString("JWToken") != null && httpAccessor.HttpContext.Session.GetString("JWToken").Length > 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="NationalParks" asp-action="Index">Prques Nacionais</a>
+                            </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Trails" asp-action="Index">Trilhas</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Trails" asp-action="Index">Trilhas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Logout">Logout</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Login">Login</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Register">Register</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

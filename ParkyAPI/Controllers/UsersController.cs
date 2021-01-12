@@ -22,7 +22,7 @@ namespace ParkyAPI.Controllers
             _userRepository = userRepository;
         }
 
-        [HttpPost(Name = "authenticate")]
+        [HttpPost("authenticate")]
         [AllowAnonymous]
         public IActionResult Authenticate([FromBody] AuthenticationModel userModel)
         {
